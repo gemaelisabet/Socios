@@ -1,0 +1,130 @@
+﻿@model Socios.Models.ReporteViewModel
+
+<div class="row">
+    <div class="form-signin form-style">
+
+
+        <div class="form-horizontal">
+            <div class="panel panel-default">
+                <div class="panel-heading panel-style">
+                    Reporte de Socios
+                </div>
+                <div class="panel-body">
+
+                    <div class="form-group">
+                        @Html.Label("Cantidad de socios:", htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-8">
+                            @Html.DisplayFor(model => model.CantidadSocios)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.Label("Promedio de edad de los socios de Racing:", htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-8">
+                            @Html.DisplayFor(model => model.PromedioEdadRacing)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.Label("Primeros 100 socios casados", htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-8">
+                        </div>
+                    </div>
+
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    @*<p class="text-left font-weight-bold">Primeros 100 socios casados</p>
+                        <b class="text-left">Primeros 100 socios casados</b>*@
+                                    <div class="table-responsive table-sm">
+                                        <table class="table table-striped table-condensed table-bordered" style="height: 50px">
+                                            <thead>
+                                                <tr>
+                                                    <th class="small font-weight-bold">Nombre</th>
+                                                    <th class="small font-weight-bold">Edad</th>
+                                                    <th class="small font-weight-bold">Equipo</th>
+                                                    <th class="small font-weight-bold">Estado Civil</th>
+                                                    <th class="small font-weight-bold">Nivel de Estudios</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                                @foreach (var item in Model.SociosCasados)
+                                                {
+                                                    <tr>
+                                                        <td class="small font-weight-normal"><span>@item.Nombre</span></td>
+                                                        <td class="small font-weight-normal"><span>@item.Edad.ToString()</span></td>
+                                                        <td class="small font-weight-normal"><span>@item.Equipo</span></td>
+                                                        <td class="small font-weight-normal"><span>@item.EstadoCivil</span></td>
+                                                        <td class="small font-weight-normal"><span>@item.NivelEstudios</span></td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.Label("5 nombres más Comunes entre los socios de River:", htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-8">
+                            @*@Html.DisplayFor(model => model.NombresFrecuentesRiver)*@
+                            @foreach (string nombre in Model.NombresFrecuentesRiver)
+                            {
+                                <p>@nombre</p>
+                                <p> </p>
+                            }
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("Equipos y sus promedios", htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-8">
+                        </div>
+                    </div>
+
+                    <div class="panel panel-default" align="center">
+                        <div class="panel-body" align="center">
+                            <div class="row">
+                                <div class="col-md-12">
+
+                                    <div class="table-responsive table-sm">
+                                        <table class="table table-striped table-condensed table-bordered" sstyle="height: 50px">
+                                            <thead>
+                                                <tr>
+                                                    <th class="small font-weight-bold">Equipo</th>
+                                                    <th class="small font-weight-bold">Cantiadad Socios</th>
+                                                    <th class="small font-weight-bold">Promedio de Edad</th>
+                                                    <th class="small font-weight-bold">Menor Edad</th>
+                                                    <th class="small font-weight-bold">Mayor Edad</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                                @foreach (var item in Model.Equipos)
+                                                {
+                                                    <tr>
+                                                        <td class="small font-weight-normal"><span>@item.EquipoNombre</span></td>
+                                                        <td class="small font-weight-normal"><span>@item.CantidadSocios.ToString()</span></td>
+                                                        <td class="small font-weight-normal"><span>@item.PromedioEdad.ToString("N2")</span></td>
+                                                        <td class="small font-weight-normal"><span>@item.MenorEdad.ToString()</span></td>
+                                                        <td class="small font-weight-normal"><span>@item.MayorEdad.ToString()</span></td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                </div>
+
+            </div>
+    </div>
+</div>
