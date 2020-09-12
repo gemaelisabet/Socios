@@ -35,8 +35,6 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-md-12">
-                                    @*<p class="text-left font-weight-bold">Primeros 100 socios casados</p>
-                        <b class="text-left">Primeros 100 socios casados</b>*@
                                     <div class="table-responsive table-sm">
                                         <table class="table table-striped table-condensed table-bordered" style="height: 50px">
                                             <thead>
@@ -71,7 +69,6 @@
                     <div class="form-group">
                         @Html.Label("5 nombres más Comunes entre los socios de River:", htmlAttributes: new { @class = "control-label col-md-4" })
                         <div class="col-md-8">
-                            @*@Html.DisplayFor(model => model.NombresFrecuentesRiver)*@
                             @foreach (string nombre in Model.NombresFrecuentesRiver)
                             {
                                 <p>@nombre</p>

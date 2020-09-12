@@ -49,69 +49,22 @@ namespace Socios.Controllers
             return pathfinal;
         }
 
-        //public ActionResult GetReporte()
-        //{
-        //    var socios = new List<Socio>();
-        //    socios = GetListadoSocios();
-
-        //    var reporte = new ReporteViewModel();
-        //    reporte.CantidadSocios = socios.Count();
-        //    reporte.PromedioEdadRacing = GetEdadPromedioRacing(socios);
-        //    reporte.NombresFrecuentesRiver = GetNombreFrecuentesRiver(socios);
-        //    reporte.SociosCasados = GetSociosCasados(socios);
-        //    reporte.Equipos = GetEquipos(socios);
-
-        //    return PartialView("_Reporte", reporte);
-        //}
-
-
-        //public List<Socio> GetListadoSocios(string path)
-        //{
-        //    var socios = new List<Socio>();
-        //    char separadorLinea = '\n';
-        //    string[] arraySocios = GetTexto().Split(separadorLinea);
-
-        //    for (int i=0; i< arraySocios.Length -1; i++)
-        //    {
-        //        char separadorComa = ';';
-        //        string[] arrayDatos = arraySocios[i].Split(separadorComa);
-
-        //        var s = new Socio()
-        //        {
-        //            IdProducto = i,
-        //            Nombre = arrayDatos[0],
-        //            Edad = Int32.Parse(arrayDatos[1]),
-        //            Equipo = arrayDatos[2],
-        //            EstadoCivil = arrayDatos[3],
-        //            NivelEstudios = arrayDatos[4]
-        //        };
-        //        socios.Add(s);
-        //    }
-        //    return socios;          
-        //}
-
         public List<Socio> LeerArchivo(string path)
         {
-           String line;
+            String line;
             var socios = new List<Socio>();
             try
             {
-                //Pass the file path and file name to the StreamReader constructor
                 const Int32 BufferSize = 128;
                 StreamReader sr = new StreamReader(path, System.Text.Encoding.GetEncoding(1252), true, BufferSize);
-          
+
                 line = sr.ReadLine();
-                //Continue to read until you reach end of file
+
                 int i = 0;
 
-
-               // string[] readText = File.ReadAllLines(path);
-                //foreach (string line in System.IO.File.ReadAllLines(path))
-                //{
-
-                    while (line != null && line != "")
-                    {
-                        char separadorComa = ';';
+                while (line != null && line != "")
+                {
+                    char separadorComa = ';';
                     string[] arrayDatos = line.Split(separadorComa);
 
                     var s = new Socio()
@@ -126,13 +79,10 @@ namespace Socios.Controllers
                     socios.Add(s);
                     line = sr.ReadLine();
                     i++;
-                    }
+                }
 
-                //}
+                sr.Close();
 
-                //close the file
-               sr.Close();
-        
             }
             catch (Exception e)
             {
@@ -141,12 +91,11 @@ namespace Socios.Controllers
             return socios;
         }
 
-       
         public double GetEdadPromedioRacing(List<Socio> socios)
         {
             double promedio = 0;
             var filtro = socios.Where(x => x.Equipo == "Racing").Select(x => x.Edad).ToList();
-            if (filtro != null && filtro.Count!=0) promedio = filtro.Average();
+            if (filtro != null && filtro.Count != 0) promedio = filtro.Average();
 
             return Math.Round(promedio, 2);
         }
@@ -156,7 +105,7 @@ namespace Socios.Controllers
             var nombres = new List<string>();
 
             var queryNombre = from socio in socios
-                              where socio.Equipo=="River"
+                              where socio.Equipo == "River"
                               group socio by socio.Nombre into resultado
                               orderby resultado.Count() descending
                               select resultado;
@@ -166,7 +115,7 @@ namespace Socios.Controllers
             {
                 nombres.Add(nombre.Key);
             }
-          
+
             return nombres;
         }
 
@@ -199,7 +148,7 @@ namespace Socios.Controllers
                 resultado.Add(e);
             }
 
-            var resultadoOrdenado = resultado.OrderByDescending(x=> x.CantidadSocios).ToList();
+            var resultadoOrdenado = resultado.OrderByDescending(x => x.CantidadSocios).ToList();
 
             return resultadoOrdenado;
         }
